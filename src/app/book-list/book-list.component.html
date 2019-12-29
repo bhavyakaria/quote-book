@@ -1,0 +1,11 @@
+<cdk-virtual-scroll-viewport class="book-list" itemSize="50">
+    <div *cdkVirtualFor="let item of itemsEmitter" class="book" (click)="newMessage(item)">
+        <div class="row">
+            <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41odqLeCv3L._SY160.jpg"
+                class="img-responsive">
+        </div>
+        <h6 class="text-center">{{ item }}</h6>
+        <p class="text-center">Description of book</p>
+        <hr>
+    </div>
+</cdk-virtual-scroll-viewport>
