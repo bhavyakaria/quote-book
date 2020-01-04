@@ -1,4 +1,5 @@
-<div class="row board">
+<div class="container board">
+    <h3>{{showList.length}} Highlights</h3>
     <cdk-virtual-scroll-viewport class="book-list" itemSize="50">
         <div *cdkVirtualFor="let x of showList">
             <div class="quote-text">
