@@ -26,10 +26,10 @@ export class QuoteBoardComponent implements OnInit {
       this.list.forEach(obj => {
 
         if (!val) {
-          val = this.list[0]['book_name'];
+          val = this.list[0].book_name;
         }
 
-        if (val === obj['book_name']) {
+        if (val === obj.book_name) {
           this.showList.push(obj);
         }
       });

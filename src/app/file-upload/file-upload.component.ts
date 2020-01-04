@@ -13,9 +13,7 @@ export class FileUploadComponent implements OnInit {
   listOfBooks = new Set();
   list = [];
 
-  constructor(private data: DataService,
-    private router: Router) { }
-
+  constructor(private data: DataService, private router: Router) { }
 
   fileChanged(e) {
     this.file = e.target.files[0];
@@ -23,7 +21,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   uploadDocument(file) {
-    let fileReader = new FileReader();
+    const fileReader = new FileReader();
     fileReader.onload = (e) => {
       this.processData(fileReader.result);
       this.router.navigateByUrl('/home');
@@ -35,10 +33,8 @@ export class FileUploadComponent implements OnInit {
     let obj;
     let quote = false;
     // By lines
-    var lines = (<string>data).split('\n');
-    for (var line = 0; line < lines.length; line++) {
-      let sam = lines[line];
-      let len = lines[line].length;
+    const lines = (data as string).split('\n');
+    for (let line = 0; line < lines.length; line++) {
       if (line === 0 || lines[line - 1].match(/^==========/)) {
         obj = new Object();
       }
@@ -46,7 +42,7 @@ export class FileUploadComponent implements OnInit {
       if (line === 0 || lines[line - 1].match(/^==========/)) {
         let x = lines[line].match(/^([^(]*)/);
         this.listOfBooks.add(x[0]);
-        obj['book_name'] = x[0];
+        obj.book_name = x[0];
       }
 
       if (lines[line].length === 1) {
@@ -60,10 +56,10 @@ export class FileUploadComponent implements OnInit {
       }
 
       if (quote) {
-        if (obj['quote']) {
-          obj['quote'] = obj['quote'].concat(lines[line]);
+        if (obj.quote) {
+          obj.quote = obj.quote.concat(lines[line]);
         } else {
-          obj['quote'] = lines[line];
+          obj.quote = lines[line];
         }
       }
     }
