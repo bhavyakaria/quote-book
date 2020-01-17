@@ -10,5 +10,8 @@ An application for viewing and adding highlights from kindle. User can even add 
 1. ```npm i```
 2. ```ng serve -o```
 
+## Screenshots
+![alt text](https://github.com/bhavyakaria/quote-book/blob/master/extra/screenshot.png "Homepage")
+
 ## Contributions
 If you have any innovative idea or suggestions for this project then do tell me. Will love to here from you.
