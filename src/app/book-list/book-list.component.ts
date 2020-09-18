@@ -15,13 +15,14 @@ export class BookListComponent implements OnInit {
   itemsEmitter = new BehaviorSubject<any[]>(this.items);
   list = new Set();
 
-  constructor(private data: DataService,
-    private cd: ChangeDetectorRef) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.listSource.subscribe(data => {
       data.forEach(val => {
-        this.items.push(val);
+        if (val) {
+          this.items.push(val);
+        }
       });
       this.itemsEmitter.next(this.items);
     });
