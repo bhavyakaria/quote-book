@@ -2,6 +2,9 @@
 
 An application for viewing and adding highlights from kindle. User can even add his own quotes(feature in process). The highlights are fetched from MyClippings.txt file which can be found in Kindle devices.
 
+## Deployed on Heroku
+https://the-quotes-book.herokuapp.com/
+
 ## Steps of using QuoteBook
 1. Fetch "MyClippings.txt" file from your Kindle device.
 2. Add the file and enjoy!
