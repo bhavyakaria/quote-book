@@ -24,7 +24,7 @@ export class FileUploadComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       this.processData(fileReader.result);
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/home');
     }
     fileReader.readAsText(this.file);
   }

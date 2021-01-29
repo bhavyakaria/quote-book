@@ -19,11 +19,6 @@ export class AuthComponent implements OnInit {
     private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe(obj => {
-      if (obj) {
-        this.router.navigate(['/home']);
-      }
-    });
   }
 
   ngAfterViewInit() {
