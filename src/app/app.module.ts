@@ -10,6 +10,7 @@ import { QuoteBoardComponent } from './quote-board/quote-board.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthComponent } from './auth/auth.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ScrollingModule
+    ScrollingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

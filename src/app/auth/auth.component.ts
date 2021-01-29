@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiRequestService } from '../utils/api-request.service';
+import { AuthService } from '../utils/auth-service.service';
 
 declare const gapi: any;
 
@@ -11,42 +13,48 @@ declare const gapi: any;
 
 export class AuthComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private apiRequest: ApiRequestService,
+    private authService: AuthService,
+    private ngZone: NgZone) { }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn.subscribe(obj => {
+      if (obj) {
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   ngAfterViewInit() {
-    if (gapi && gapi.signin2) {
-      googleRenderer.call(this);
-    } else {
-      setTimeout(googleRenderer.bind(this), 1500)
-    }
-    function googleRenderer() {
-      if (!gapi || !gapi.signin2) {
-        // this.toastr.danger('Page not loaded correctly, Please refresh', 'Load Error');
-        alert("Page not loaded correctly, Please reload")
-      }
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'left': 'auto',
-        'right': 'auto',
-        'longtitle': true,
-        'theme': 'light',
-        'onsuccess': param => this.onSignIn(param)
-      });
-    }
+    this.intitiateGoogleApi();
   }
 
-  onSignIn(googleUser) {
-    // this.authService.setGoogleAuthInstance(gapi.auth2.getAuthInstance());
-    let profile = googleUser.getBasicProfile();
-    let idToken = googleUser.getAuthResponse().id_token;
-    console.log(profile);
-    console.log(idToken);
-    this.router.navigate(['/home']);
+  intitiateGoogleApi() {
+    gapi.load('auth2', () => {
+      gapi.auth2.init({
+        client_id: '815992551156-irt3gg9c74m5taujctpt6dsu8bm4gm5v.apps.googleusercontent.com',
+        cookie_policy: 'single_host_origin',
+        ux_mode: 'popup',
+      }).attachClickHandler(document.getElementById('google-signIn-btn'), {},
+          (googleUser) => {
+            const profile = googleUser.getBasicProfile();
+            const idToken = googleUser.getAuthResponse().id_token;
+            const email = profile.getEmail();
+            const name = profile.getName();
+            const profilePic = profile.getImageUrl();
+            this.ngZone.run(() => this.googleSignIn(idToken, email, name, profilePic));
+          }, (error) => {
+
+          });
+    });
+  }
+
+  googleSignIn(idToken, email, name, profilePic) {
+    this.apiRequest.userLogin(idToken, email, name, profilePic).subscribe(res => {
+      console.log(res);
+      this.authService.login(res);
+    });
   }
 
 }
