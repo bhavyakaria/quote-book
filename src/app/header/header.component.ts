@@ -10,6 +10,7 @@ import { LocalStorageService } from '../utils/local-storage.service';
 export class HeaderComponent implements OnInit {
 
   userName = '';
+  profilePic = '';
   constructor(private authService: AuthService, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
