@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.data.bookData.value);
     if (this.data.bookData.value.length === 0) {
       this.router.navigateByUrl('/');
     }

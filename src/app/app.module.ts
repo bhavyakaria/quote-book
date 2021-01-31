@@ -9,6 +9,10 @@ import { HeaderComponent } from './header/header.component';
 import { QuoteBoardComponent } from './quote-board/quote-board.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { HomeComponent } from './home/home.component';
+import { AuthComponent } from './auth/auth.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LocalStorageService } from './utils/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -17,14 +21,17 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     QuoteBoardComponent,
     FileUploadComponent,
-    HomeComponent
+    HomeComponent,
+    AuthComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ScrollingModule
+    ScrollingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

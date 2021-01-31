@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div class="row" style="display: grid;">
+    <ng-container *ngIf="!router.url.includes('login')">
+        <div class="col-md-12 header">
+            <app-header ></app-header>
+        </div>
+    </ng-container>
+    <div class="row body-part" style="display: grid;">
+        <router-outlet></router-outlet>
+    </div>
+</div>

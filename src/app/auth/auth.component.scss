@@ -1,0 +1,14 @@
+#login-screen {
+  background: url('https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2019/11/canva-literary-book-pages-background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+  background-color: #333;
+  background-blend-mode: multiply;
+}
+
+#google-signIn-btn {
+  color: #fff;
+}
