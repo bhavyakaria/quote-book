@@ -1,6 +1,6 @@
 export const appConstants = {
-  // prodApiBaseUrl: 'https://',
-  prodApiBaseUrl: 'http://localhost:5000',
+  prodApiBaseUrl: 'https://quote-book-server.herokuapp.com',
+  // prodApiBaseUrl: 'http://localhost:5000',
 
   version: '1.0.0',
   regexes: {
