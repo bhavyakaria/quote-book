@@ -37,17 +37,17 @@ export class ServerRequestConfigService {
   }
   get(apiUrl: string, requestParams?: HttpParams | {}) {
     if (this.noHeadersRequiredUrls.includes(apiUrl)) {
-      return this.http.get(appConstants.prodApiBaseUrl + apiUrl, { params: requestParams }).pipe(map((res: ResponseInterface) => res.data));
+      return this.http.get(appConstants.prodApiBaseUrl + apiUrl, { params: requestParams });
     }
     this.setHeaders();
-    return this.http.get(appConstants.prodApiBaseUrl + apiUrl, { headers: this.requestHeaders, params: requestParams }).pipe(map((res: ResponseInterface) => res.data));
+    return this.http.get(appConstants.prodApiBaseUrl + apiUrl, { headers: this.requestHeaders, params: requestParams });
   }
   post(apiUrl: string, payLoad: object): Observable<any> {
     if (this.noHeadersRequiredUrls.includes(apiUrl)) {
-      return this.http.post(appConstants.prodApiBaseUrl + apiUrl, payLoad).pipe(map((res: ResponseInterface) => res.data));
+      return this.http.post(appConstants.prodApiBaseUrl + apiUrl, payLoad);
     }
     this.setHeaders();
-    return this.http.post(appConstants.prodApiBaseUrl + apiUrl, payLoad, { headers: this.requestHeaders }).pipe(map((res: ResponseInterface) => res.data));
+    return this.http.post(appConstants.prodApiBaseUrl + apiUrl, payLoad, { headers: this.requestHeaders });
   }
   put(apiUrl: string, payLoad: object, uniqueId?: any) {
     this.setHeaders();

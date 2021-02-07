@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { ApiRequestService } from '../utils/api-request.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -13,7 +14,11 @@ export class FileUploadComponent implements OnInit {
   listOfBooks = new Set();
   list = [];
 
-  constructor(private data: DataService, private router: Router) { }
+  bookList = [];
+
+  constructor(private data: DataService, 
+    private router: Router,
+    private apiRequestService: ApiRequestService) { }
 
   fileChanged(e) {
     this.file = e.target.files[0];
@@ -24,7 +29,16 @@ export class FileUploadComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       this.processData(fileReader.result);
-      this.router.navigateByUrl('/home');
+
+      this.apiRequestService.uploadKindleNotes(this.bookList).subscribe(res => {
+        if (res['status'] == 'SUCCESS') {
+          this.router.navigateByUrl('/');
+        } else {
+          console.log('Something went wrong!');
+        }
+      }, err => {
+          console.log('Something went wrong!');
+      });
     }
     fileReader.readAsText(this.file);
   }
@@ -63,10 +77,20 @@ export class FileUploadComponent implements OnInit {
         }
       }
     }
-    // console.log(this.listOfBooks);
-    this.data.bookList(this.listOfBooks);
-    this.data.setbookData(this.list);
 
+    for (let book of this.listOfBooks) {
+      const bookObj = {
+        title: book.toString().trim(),
+        notes: []
+      };
+      this.list.forEach(obj => {
+        if (obj['book_name'].trim() === bookObj['title'])
+        bookObj['notes'].push(obj['quote']);
+      });
+      if (bookObj['title']) {
+        this.bookList.push(bookObj);
+      }
+    }
   }
 
   ngOnInit() {

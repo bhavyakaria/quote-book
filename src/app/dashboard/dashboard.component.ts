@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BookResponse } from '../models/interfaces';
+import { ApiRequestService } from '../utils/api-request.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  listOfBooks: any[];
+
+  constructor(private router: Router,
+    private apiRequestService: ApiRequestService) { }
 
   ngOnInit() {
+    this.apiRequestService.fetchBooks().subscribe((res) => {
+      this.listOfBooks = res.books;
+    });
   }
 
 }

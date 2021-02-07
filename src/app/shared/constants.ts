@@ -17,4 +17,5 @@ export const apiConstants = {
   socialLogin: { url: '/v1/auth/login/' },
   socialLogout: { url: '/v1/iam/admin/logout/' },
   fetchBooks: { url: '/v1/api/books/' },
+  saveNotes: {url: '/v1/api/books' }
 };

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { BehaviorSubject } from 'rxjs';
@@ -14,6 +14,8 @@ export class BookListComponent implements OnInit {
   items = [];
   itemsEmitter = new BehaviorSubject<any[]>(this.items);
   list = new Set();
+
+  @Input() listOfBooks : any[];
 
   constructor(private data: DataService) { }
 

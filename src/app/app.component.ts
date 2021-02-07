@@ -11,16 +11,12 @@ import { ApiRequestService } from './utils/api-request.service';
 
 export class AppComponent {
   title = 'quote-book';
-  constructor(private data: DataService, public router: Router, 
+
+  constructor(private data: DataService,
+    private router: Router,
     private apiRequestService: ApiRequestService) { }
 
   ngOnInit() {
-    this.apiRequestService.fetchBooks().subscribe((books) => {
-      console.log(books);
-    });
 
-    if (this.data.bookData.value.length === 0) {
-      this.router.navigateByUrl('/file-upload');
-    }
   }
 }

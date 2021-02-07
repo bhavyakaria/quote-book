@@ -4,3 +4,12 @@ export interface User {
   user_session_token: string;
   email_id: string;
 }
+
+export interface BookResponse {
+  books: Book[];
+}
+
+export interface Book {
+  title: string;
+  notes: string[];
+}
