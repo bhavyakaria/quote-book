@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     let adminName = this.localStorageService.get('name');
-    this.userName = adminName || 'Awesome Blossom';
+    this.userName = 'Hi, ' + (adminName || 'Awesome Blossom');
   }
 
   logout(event: MouseEvent) {
