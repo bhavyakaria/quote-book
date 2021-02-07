@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'quote-book';
 
   constructor(private data: DataService,
-    private router: Router,
+    public router: Router,
     private apiRequestService: ApiRequestService) { }
 
   ngOnInit() {
