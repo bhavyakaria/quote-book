@@ -22,7 +22,7 @@ export class AuthService {
     if (user.user_session_token && user.user_id) {
       this.setUserDataInLocalStorage(user);
       this.loggedIn.next(true);
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     }
   }
   logout() {
