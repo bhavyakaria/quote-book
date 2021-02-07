@@ -1,6 +1,6 @@
 export const appConstants = {
-  prodApiBaseUrl: 'https://quote-book-server.herokuapp.com',
-  // prodApiBaseUrl: 'http://localhost:5000',
+  // prodApiBaseUrl: 'https://quote-book-server.herokuapp.com',
+  prodApiBaseUrl: 'http://localhost:5000',
 
   version: '1.0.0',
   regexes: {
@@ -16,4 +16,5 @@ export const appConstants = {
 export const apiConstants = {
   socialLogin: { url: '/v1/auth/login/' },
   socialLogout: { url: '/v1/iam/admin/logout/' },
+  fetchBooks: { url: '/v1/api/books/' },
 };
