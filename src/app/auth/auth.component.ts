@@ -47,8 +47,7 @@ export class AuthComponent implements OnInit {
 
   googleSignIn(idToken, email, name, profilePic) {
     this.apiRequest.userLogin(idToken, email, name, profilePic).subscribe(res => {
-      console.log(res);
-      this.authService.login(res);
+      this.authService.login(res['data']);
     });
   }
 

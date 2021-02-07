@@ -1,13 +1,25 @@
 <div class="container board">
-    <h3>{{showList.length}} Highlights</h3>
-    <cdk-virtual-scroll-viewport class="book-list" itemSize="50">
-        <div *cdkVirtualFor="let x of showList">
-            <div class="quote-text">
-                <p>{{x['quote']}}
-                </p>
+    <ng-container *ngIf="showList.length > 0 else emptyText">
+        <h3>{{showList.length}} Highlights</h3>
+        <cdk-virtual-scroll-viewport class="book-list" itemSize="50">
+            <div *cdkVirtualFor="let x of showList">
+                <div class="quote-text">
+                    <p>{{x}}</p>
+                </div>
+                <hr>
+                <br />
             </div>
-            <hr>
-            <br />
+        </cdk-virtual-scroll-viewport>
+    </ng-container>
+    <ng-template #emptyText>
+        <!-- <div class="book-list text-center empty-text align-self-center">
+            Recollect all the important points with Quote Book.
+        </div> -->
+        <div class="h-100 book-list row align-items-center">
+            <div class="col text-center">
+                <img src="/assets/img/vector.png" width="200" height="200">
+                <p>Recollect all the important points with Quote Book.</p>
+            </div>
         </div>
-    </cdk-virtual-scroll-viewport>
+    </ng-template>
 </div>

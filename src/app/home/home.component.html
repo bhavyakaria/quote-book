@@ -1,10 +1,11 @@
 <div class="row">
     <div class="row body-part">
         <div class="col-md-3">
-            <app-book-list></app-book-list>
+            <app-book-list [listOfBooks]="listOfBooks"></app-book-list>
         </div>
         <div class="col-md-9">
-            <app-quote-board></app-quote-board>
+            <app-quote-board [listOfBooks]="listOfBooks"></app-quote-board>
         </div>
     </div>
 </div>
+<ngx-ui-loader [bgsOpacity]="1" ></ngx-ui-loader>

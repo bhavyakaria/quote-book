@@ -13,6 +13,7 @@ import { AuthComponent } from './auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LocalStorageService } from './utils/local-storage.service';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LocalStorageService } from './utils/local-storage.service';
     BrowserModule,
     AppRoutingModule,
     ScrollingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]

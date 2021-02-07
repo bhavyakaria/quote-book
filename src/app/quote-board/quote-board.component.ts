@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,29 +11,29 @@ export class QuoteBoardComponent implements OnInit {
 
   constructor(private data: DataService) { }
 
+  @Input() listOfBooks: any[];
+
   list = [];
   showList = [];
   listEmitter = new BehaviorSubject<any[]>(this.showList);
 
   ngOnInit() {
 
-    this.data.bookData.subscribe(res => {
-      this.list = res;
-    });
-
     this.data.bookName.subscribe(val => {
       this.showList = [];
-      this.list.forEach(obj => {
+      if (this.listOfBooks) {
+        this.listOfBooks.forEach(obj => {
 
-        if (!val) {
-          val = this.list[0].book_name;
-        }
+          if (!val) {
+            val = this.listOfBooks[0]['title'];
+          }
 
-        if (val === obj.book_name) {
-          this.showList.push(obj);
-        }
-      });
-      this.listEmitter.next(this.showList);
+          if (val === obj['title']) {
+            this.showList = obj['notes'];
+          }
+        });
+        this.listEmitter.next(this.showList);
+      }
     });
   }
 

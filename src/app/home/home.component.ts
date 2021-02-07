@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { ApiRequestService } from '../utils/api-request.service';
+import { BookResponse } from '../models/interfaces';
+
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +12,21 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private data: DataService, private router: Router) { }
+  listOfBooks: any[];
+
+  constructor(private router: Router,
+    private apiRequestService: ApiRequestService,
+    private ngxLoader: NgxUiLoaderService) { }
 
   ngOnInit() {
-    if (this.data.bookData.value.length === 0) {
-      this.router.navigateByUrl('/');
-    }
+    this.ngxLoader.start();
+    this.apiRequestService.fetchBooks().subscribe((res: BookResponse) => {
+      this.listOfBooks = res.books;
+      this.ngxLoader.stop();
+      if (this.listOfBooks.length == 0) {
+        this.router.navigateByUrl('/file-upload');
+      }
+    });
   }
 
 }
