@@ -1,8 +1,10 @@
+@import "styles/colors";
+
 body {
   font-size: 26px;
+  background-color: $white;
 }
 
 .App {
   width: 100%;
-
 }
