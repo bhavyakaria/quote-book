@@ -1,0 +1,29 @@
+.kindle-file-upload {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-image:
+      linear-gradient(to right, rgb(203, 213, 225, 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(203, 213, 225, 0.3) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  background-position: center center;
+}
+
+.container {
+  margin: auto;
+  align-self: center;
+  left: 25%;
+}
+
+.file-upload {
+  align-self: center;
+  margin: auto;
+}
+
+.text {
+  width: 100%;
+  margin-bottom: 24px;
+}
