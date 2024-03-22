@@ -1,6 +1,21 @@
+import { useNavigate } from "react-router-dom";
+import { praseKindleMyClippingFile } from "../../helpers/kindle-file-parser";
 import "./KindleFileUpload.scss";
 
 const KindleFileUpload = () => {
+  const navigate = useNavigate();
+  
+  const readFile = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result;
+      const clips = praseKindleMyClippingFile(text);
+      navigate('/dashboard', { state: { clipsData: clips } })
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+
   return (
     <>
       <div className="kindle-file-upload">
@@ -43,7 +58,7 @@ const KindleFileUpload = () => {
                   select the ‘My Clippings.txt’ file.
                 </p>
               </div>
-              <input id="dropzone-file" type="file" className="hidden" />
+              <input id="dropzone-file" type="file" className="hidden" onChange={readFile} />
             </label>
           </div>
         </div>
