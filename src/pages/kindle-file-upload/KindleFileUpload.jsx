@@ -1,17 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import { addDataInBulk, Stores } from "../../db/index";
 import { praseKindleMyClippingFile } from "../../helpers/kindle-file-parser";
 import "./KindleFileUpload.scss";
 
 const KindleFileUpload = () => {
   const navigate = useNavigate();
-  
+
   const readFile = (e) => {
     e.preventDefault();
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       const text = e.target.result;
       const clips = praseKindleMyClippingFile(text);
-      navigate('/dashboard', { state: { clipsData: clips } })
+      try {
+        await addDataInBulk(Stores.Highlights, clips);
+      } catch (err) {
+        console.log("Something went wrong");
+      }
+      navigate("/dashboard", { state: { clipsData: clips } });
     };
     reader.readAsText(e.target.files[0]);
   };
@@ -21,21 +27,21 @@ const KindleFileUpload = () => {
       <div className="kindle-file-upload">
         <div className="container">
           <div className="text text-center">
-            <div className="text-2xl font-bold dark:text-white mb-2">
+            <div className="mb-2 text-2xl font-bold dark:text-white">
               Upload your 'My Clippings.txt' file
             </div>
-            <div className="text-xl mb-2">
+            <div className="mb-2 text-xl">
               Connect Kindle to your computer with the USB cable.
             </div>
           </div>
-          <div className="file-upload flex items-center justify-center w-1/2 z-10">
+          <div className="file-upload z-10 flex w-1/2 items-center justify-center">
             <label
               for="dropzone-file"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <div className="flex flex-col items-center justify-center pb-6 pt-5">
                 <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  className="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -58,7 +64,12 @@ const KindleFileUpload = () => {
                   select the ‘My Clippings.txt’ file.
                 </p>
               </div>
-              <input id="dropzone-file" type="file" className="hidden" onChange={readFile} />
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                onChange={readFile}
+              />
             </label>
           </div>
         </div>
