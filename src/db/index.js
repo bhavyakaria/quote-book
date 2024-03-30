@@ -12,8 +12,8 @@ export const initDB = () => {
     request = indexedDB.open("quote_book");
 
     // if the data object store doesn't exist, create it
-    request.onupgradeneeded = () => {
-      db = request.result;
+    request.onupgradeneeded = (e) => {
+      db = e.target.result;
 
       if (!db.objectStoreNames.contains(Stores.Highlights)) {
         console.log("Creating quote book store");
@@ -22,8 +22,8 @@ export const initDB = () => {
       // no need to resolve here
     };
 
-    request.onsuccess = () => {
-      db = request.result;
+    request.onsuccess = (e) => {
+      db = e.target.result;
       version = db.version;
       console.log("request.onsuccess - initDB", version);
       resolve(true);
@@ -40,8 +40,8 @@ export const addData = (storeName, data) => {
     // open the connection
     request = indexedDB.open("quote_book");
 
-    request.onsuccess = () => {
-      db = request.result;
+    request.onsuccess = (e) => {
+      db = e.target.result;
       console.log("request.onsuccess - addData", data);
       const tx = db.transaction(storeName, "readwrite");
       const store = tx.objectStore(storeName);
@@ -65,8 +65,8 @@ export const addDataInBulk = (storeName, data) => {
     // open the connection
     request = indexedDB.open("quote_book");
 
-    request.onsuccess = () => {
-      db = request.result;
+    request.onsuccess = (e) => {
+      db = e.target.result;
       console.log("request.onsuccess - addData", data);
       const tx = db.transaction(storeName, "readwrite");
       const store = tx.objectStore(storeName);
@@ -91,9 +91,9 @@ export const deleteData = (storeName, key) => {
   return new Promise((resolve) => {
     request = indexedDB.open("quote_book", version);
 
-    request.onsuccess = () => {
+    request.onsuccess = (e) => {
       console.log("request.onsuccess - deleteData", key);
-      db = request.result;
+      db = e.target.result;
 
       const tx = db.transaction(storeName, "readwrite");
       const store = tx.objectStore(storeName);
@@ -112,9 +112,9 @@ export const updateData = (storeName, key, data) => {
   return new Promise((resolve) => {
     request = indexedDB.open("quote_book", version);
 
-    request.onsuccess = () => {
+    request.onsuccess = (e) => {
       console.log("request.onsuccess - updateData", key);
-      db = request.result;
+      db = e.target.result;
 
       const tx = db.transaction(storeName, "readwrite");
       const store = tx.objectStore(storeName);
@@ -135,9 +135,9 @@ export const getStoreData = (storeName) => {
   return new Promise((resolve) => {
     request = indexedDB.open("quote_book", version);
 
-    request.onsuccess = () => {
+    request.onsuccess = (e) => {
       console.log("request.onsuccess - getStoreData");
-      db = request.result;
+      db = e.target.result;
 
       const tx = db.transaction(storeName, "readonly");
       const store = tx.objectStore(storeName);
