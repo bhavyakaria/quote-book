@@ -5,10 +5,48 @@
 }
 
 .left-section {
-  flex: 20%;
-  background-color: antiquewhite;
+  min-width: 300px;
+  flex: 22%;
+  background-color: #f3f3f3;
+
+  p {
+    font-size: 14px;
+  }
 }
 
 .right-section {
-  flex: 80%;
+  flex: 78%;
+}
+
+.book-list {
+  height: 94vh;
+  overflow: scroll;
+}
+
+.search {
+  position: static;
+  height: 6vh;
+}
+
+.book-container {
+  margin-top: 12px;
+  border-top: 1px solid #e7e7e7;
+}
+
+.cover {
+  width: 80px;
+  height: 100px;
+  background-color: #fff;
+  margin: 16px auto;
+}
+
+.book-name {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.book-author {
+  font-size: 14px;
+  color: #565959;
 }
