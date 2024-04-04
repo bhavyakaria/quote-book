@@ -1,13 +1,16 @@
+@import "../../styles/colors";
+
 .highlights {
   display: flex;
   width: 100%;
   height: 100vh;
+  background-color: $background-color;
 }
 
 .left-section {
   min-width: 300px;
   flex: 22%;
-  background-color: #f3f3f3;
+  background-color: $white;
 
   p {
     font-size: 14px;
@@ -16,27 +19,45 @@
 
 .right-section {
   flex: 78%;
+  padding: 0 24px 0 24px;
+  display: flex;
 }
 
 .book-list {
-  height: 94vh;
+  height: calc(100vh - 90px);
   overflow: scroll;
+}
+
+.quote-list {
+  overflow: scroll;
+
+  :first-child {
+    margin-top: 0;
+  }
 }
 
 .search {
   position: static;
-  height: 6vh;
+  border-bottom: 1px solid $background-color;
+}
+
+#search {
+  background-color: $background-color;
 }
 
 .book-container {
   margin-top: 12px;
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid $background-color;
+
+  &:first-child {
+    border-top: none;
+  }
 }
 
 .cover {
-  width: 80px;
-  height: 100px;
-  background-color: #fff;
+  width: 130px;
+  height: 160px;
+  background-color: $background-color;
   margin: 16px auto;
 }
 
@@ -49,4 +70,21 @@
 .book-author {
   font-size: 14px;
   color: #565959;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.book-list::-webkit-scrollbar,
+.quote-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.book-list,
+.quote-list {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+img {
+  cursor: pointer;
 }
