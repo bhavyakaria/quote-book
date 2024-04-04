@@ -1,0 +1,25 @@
+@import "../../styles/colors";
+
+.book-card {
+  margin: 16px 0;
+
+  .cover {
+    width: 60px;
+    height: 80px;
+    margin: 0 8px 0 0;
+  }
+
+  .book-name {
+    margin: 0 0 6px 0;
+  }
+
+  .book-cta {
+    color: $blue-primary;
+  }
+
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
