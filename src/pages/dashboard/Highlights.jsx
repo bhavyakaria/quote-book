@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
-import { getStoreData, Stores } from "../../db/index";
-import "./Highlights.scss";
+import { useEffect, useState } from 'react';
+import { getStoreData, Stores } from '../../db/index';
+import QuoteCard from '../../components/quote-card/QuoteCard';
+import BookRecommendCard from '../../components/book-recommend-card/BookRecommendCard';
+import './Highlights.scss';
 
 const Highlights = () => {
   const [highlights, setHighlights] = useState([]);
