@@ -1,8 +1,9 @@
-@import "../../styles/colors";
+@import '../../styles/colors';
 
 .quote-card {
-  width: 720px;
+  width: -moz-available;
   height: auto;
+  border: 1px solid #f1f4f8;
 }
 
 svg {
