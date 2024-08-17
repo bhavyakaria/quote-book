@@ -132,19 +132,27 @@ export const updateData = (storeName, key, data) => {
 };
 
 export const getStoreData = (storeName) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     request = indexedDB.open("quote_book", version);
 
     request.onsuccess = (e) => {
       console.log("request.onsuccess - getStoreData");
       db = e.target.result;
 
-      const tx = db.transaction(storeName, "readonly");
-      const store = tx.objectStore(storeName);
-      const res = store.getAll();
-      res.onsuccess = () => {
-        resolve(res.result);
-      };
+      if (db.objectStoreNames.contains(storeName)) {
+        const tx = db.transaction(storeName, "readonly");
+        const store = tx.objectStore(storeName);
+        const res = store.getAll();
+        res.onsuccess = () => {
+          resolve(res.result);
+        };
+      } else {
+        resolve(null);
+      }
+    };
+
+    request.onerror = (e) => {
+      resolve(null);
     };
   });
 };
