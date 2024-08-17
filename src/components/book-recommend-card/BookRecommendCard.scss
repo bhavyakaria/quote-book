@@ -1,5 +1,6 @@
 .book-recommend-card {
-  width: 360px;
+  min-width: 360px;
   height: fit-content;
-  margin: 0 24px;
+  margin: 0 0 0 24px;
+  border: 1px solid #f1f4f8;
 }
