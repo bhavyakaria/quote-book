@@ -9,6 +9,7 @@
 
 .left-section {
   min-width: 300px;
+  max-width: 350px;
   flex: 22%;
   background-color: $white;
 
@@ -21,6 +22,7 @@
   flex: 78%;
   padding: 0 24px 0 24px;
   display: flex;
+  justify-content: end;
 }
 
 .book-list {
