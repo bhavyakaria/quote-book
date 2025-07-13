@@ -14,12 +14,23 @@ import { DataService } from '../data.service';
 export class DashboardComponent implements OnInit {
 
   listOfBooks: any[] = [];
+  selectedBook: any;
+  currentDate: Date = new Date();
 
   constructor(private data: DataService) { }
+
+  selectBook(book: any) {
+    this.selectedBook = book;
+    this.currentDate = new Date();
+  }
 
   ngOnInit() {
     this.data.bookData.subscribe((books) => {
       this.listOfBooks = books;
+      if (books.length) {
+        this.selectedBook = books[0];
+        this.currentDate = new Date();
+      }
     });
   }
 

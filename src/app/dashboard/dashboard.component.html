@@ -1,13 +1,26 @@
-<div *ngIf="listOfBooks.length; else noData">
-  <div *ngFor="let book of listOfBooks" class="book">
-    <h2>{{ book.title }}</h2>
+<h1 class="page-title">Your Notes and Highlights</h1>
+<div class="dashboard-container">
+  <aside class="sidebar">
     <ul>
-      <li *ngFor="let note of book.notes">{{ note }}</li>
+      <li *ngFor="let book of listOfBooks" (click)="selectBook(book)" [class.active]="book===selectedBook">
+        {{ book.title }}
+      </li>
     </ul>
-  </div>
-  <button routerLink="/file-upload">Upload Another File</button>
+  </aside>
+  <section class="content">
+    <div class="book-header">
+      <h1>{{ selectedBook?.title }}</h1>
+      <div class="date">Last accessed on {{ currentDate | date:'EEEE, MMMM d, y' }}</div>
+      <div class="stats">
+        {{ selectedBook?.notes.length || 0 }} Highlight(s) | 0 Note(s)
+      </div>
+    </div>
+    <div class="highlights">
+      <div *ngFor="let note of selectedBook?.notes; let last = last" class="highlight-item">
+        <div class="stripe"></div>
+        <div class="note-text">{{ note.text || note }}</div>
+        <hr *ngIf="!last" class="divider" />
+      </div>
+    </div>
+  </section>
 </div>
-<ng-template #noData>
-  <p>No data available. Please upload a file first.</p>
-  <button routerLink="/file-upload">Go to Upload</button>
-</ng-template>
