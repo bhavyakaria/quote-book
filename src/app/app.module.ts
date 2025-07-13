@@ -1,39 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-
-import { AppRoutingModule } from './app-routing.module';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { BookListComponent } from './book-list/book-list.component';
-import { HeaderComponent } from './header/header.component';
-import { QuoteBoardComponent } from './quote-board/quote-board.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { HomeComponent } from './home/home.component';
-import { AuthComponent } from './auth/auth.component';
+import { provideRouter } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LocalStorageService } from './utils/local-storage.service';
-import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { DataService } from './data.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { routes } from './app.routes';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    BookListComponent,
-    HeaderComponent,
-    QuoteBoardComponent,
-    FileUploadComponent,
-    HomeComponent,
-    AuthComponent,
-    DashboardComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ScrollingModule,
-    HttpClientModule,
-    NgxUiLoaderModule
-  ],
-  providers: [LocalStorageService],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(HttpClientModule),
+    provideAnimations(),
+    LocalStorageService,
+    DataService,
+    NgxUiLoaderService
+  ]
+});
