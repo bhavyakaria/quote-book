@@ -1,0 +1,13 @@
+<div *ngIf="listOfBooks.length; else noData">
+  <div *ngFor="let book of listOfBooks" class="book">
+    <h2>{{ book.title }}</h2>
+    <ul>
+      <li *ngFor="let note of book.notes">{{ note }}</li>
+    </ul>
+  </div>
+  <button routerLink="/file-upload">Upload Another File</button>
+</div>
+<ng-template #noData>
+  <p>No data available. Please upload a file first.</p>
+  <button routerLink="/file-upload">Go to Upload</button>
+</ng-template>

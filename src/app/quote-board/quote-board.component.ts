@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DataService } from '../data.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-quote-board',
+  standalone: true,
+  imports: [CommonModule, ScrollingModule],
   templateUrl: './quote-board.component.html',
   styleUrls: ['./quote-board.component.scss']
 })

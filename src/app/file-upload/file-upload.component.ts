@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
-import { ApiRequestService } from '../utils/api-request.service';
 
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-file-upload',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
@@ -17,8 +19,7 @@ export class FileUploadComponent implements OnInit {
   bookList = [];
 
   constructor(private data: DataService, 
-    private router: Router,
-    private apiRequestService: ApiRequestService) { }
+    private router: Router) { }
 
   fileChanged(e) {
     this.file = e.target.files[0];
@@ -29,16 +30,6 @@ export class FileUploadComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       this.processData(fileReader.result);
-
-      this.apiRequestService.uploadKindleNotes(this.bookList).subscribe(res => {
-        if (res['status'] == 'SUCCESS') {
-          this.router.navigateByUrl('/');
-        } else {
-          console.log('Something went wrong!');
-        }
-      }, err => {
-          console.log('Something went wrong!');
-      });
     }
     fileReader.readAsText(this.file);
   }
@@ -91,6 +82,9 @@ export class FileUploadComponent implements OnInit {
         this.bookList.push(bookObj);
       }
     }
+    // store processed data and navigate to dashboard
+    this.data.setbookData(this.bookList);
+    this.router.navigate(['/dashboard']);
   }
 
   ngOnInit() {

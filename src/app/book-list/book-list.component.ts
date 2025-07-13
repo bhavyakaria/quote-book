@@ -1,10 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DataService } from '../data.service';
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-book-list',
+  standalone: true,
+  imports: [CommonModule, ScrollingModule],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })

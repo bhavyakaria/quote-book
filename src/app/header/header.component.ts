@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../utils/auth-service.service';
 import { LocalStorageService } from '../utils/local-storage.service';
 
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -11,20 +13,10 @@ export class HeaderComponent implements OnInit {
 
   userName = '';
   profilePic = '';
-  constructor(private authService: AuthService, private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     let adminName = this.localStorageService.get('name');
     this.userName = 'Hi, ' + (adminName || 'Awesome Blossom');
   }
-
-  logout(event: MouseEvent) {
-    this.authService.logout();
-    try {
-      event.preventDefault();
-    } catch (e) {
-
-    }
-  }
-
 }
